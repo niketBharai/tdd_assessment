@@ -15,7 +15,9 @@ class StringCalculator {
 
     const negativeNumbers = numArray.filter((num) => num < 0);
     if (negativeNumbers.length > 0) {
-      console.log("negative numbers not allowed " + negativeNumbers.join(", "));
+      throw new Error(
+        "negative numbers not allowed " + negativeNumbers.join(", ")
+      );
     }
 
     return numArray.reduce((sum, num) => sum + num, 0);
@@ -30,5 +32,14 @@ console.log(calculator.add("1,5"));
 console.log(calculator.add("1\n2,3"));
 console.log(calculator.add("//;\n1;2"));
 
-console.log(calculator.add("-1,2"));
-console.log(calculator.add("1,-2,-3"));
+try {
+  console.log(calculator.add("-1,2"));
+} catch (e) {
+  console.error(e.message);
+}
+
+try {
+  console.log(calculator.add("1,-2,-3"));
+} catch (e) {
+  console.error(e.message);
+}
